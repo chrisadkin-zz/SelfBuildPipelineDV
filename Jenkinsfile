@@ -8,9 +8,7 @@ def BranchToPort(String branchName) {
     ]
     BranchPortMap.find { it['branch'] ==  branchName }['port']
 }
- 
-def StartContainer = 'docker -ti --volume-driver=pure -v ${env.BRANCH_NAME}:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinux${env.BRANCH_NAME} -d -i -p ${BranchToPort(env.BRANCH_NAME)}:1433 microsoft/mssql-server-linux'
- 
+  
 def DeployDacpac() {
     def SqlPackage = "C:\\Program Files\\Microsoft SQL Server\\140\\DAC\\bin\\sqlpackage.exe"
     def SourceFile = "SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac"
@@ -31,7 +29,16 @@ node('master') {
 }
 
 node ('linux-slave') {
-    stage('On linux-slave') {
-        sh $StartContainer
+    stage('Start Container') {
+        sh 'docker -ti --volume-driver=pure -v DataVol:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinuxCtr -d -i -p 15556:1433 microsoft/mssql-server-linux'
     }
+}
+
+node('master') {
+    def SqlPackage = "C:\\Program Files\\Microsoft SQL Server\\140\\DAC\\bin\\sqlpackage.exe"
+    def SourceFile = "SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac"
+    def ConnString = "server=localhost,15556;database=SsdtDevOpsDemo;user id=sa;password=P@ssword1"
+ 
+    unstash 'theDacpac'
+    bat "\"${SqlPackage}\" /Action:Publish /SourceFile:\"${SourceFile}\" /TargetConnectionString:\"${ConnString}\" /p:ExcludeObjectType=Logins"
 }
