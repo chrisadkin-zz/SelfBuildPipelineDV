@@ -32,6 +32,6 @@ node('master') {
 
 node ('linux-slave') {
     stage('On linux-slave') {
-        sh ${StartContainer} 
+        sh $StartContainer
     }
 }
