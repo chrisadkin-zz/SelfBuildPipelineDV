@@ -1,0 +1,84 @@
+05/10/2017 12:45:28	This log contains information about the import schema operation into project 'SelfBuildPipelineDV' on computer 'DESKTOP-E2BAUEI' by user 'cadkin'.
+05/10/2017 12:45:28	Import of database schema has started.
+05/10/2017 12:45:33	Gathering database credentials
+05/10/2017 12:45:33	Gathering database options
+05/10/2017 12:45:33	Gathering users
+05/10/2017 12:45:33	Gathering roles
+05/10/2017 12:45:33	Gathering application roles
+05/10/2017 12:45:33	Gathering role memberships
+05/10/2017 12:45:33	Gathering filegroups
+05/10/2017 12:45:33	Gathering full-text catalogs
+05/10/2017 12:45:33	Gathering assemblies
+05/10/2017 12:45:33	Gathering certificates
+05/10/2017 12:45:33	Gathering asymmetric keys
+05/10/2017 12:45:33	Gathering symmetric keys
+05/10/2017 12:45:33	Gathering encrypted symmetric keys
+05/10/2017 12:45:33	Gathering schemas
+05/10/2017 12:45:33	Gathering XML schema collections
+05/10/2017 12:45:33	Gathering user-defined data types
+05/10/2017 12:45:33	Gathering user-defined types
+05/10/2017 12:45:33	Gathering table types
+05/10/2017 12:45:33	Gathering unique keys for table types
+05/10/2017 12:45:33	Gathering primary keys for table types
+05/10/2017 12:45:33	Gathering indexes for table types
+05/10/2017 12:45:33	Gathering check constraints for table types
+05/10/2017 12:45:33	Gathering default constraints for table types
+05/10/2017 12:45:33	Gathering partition functions
+05/10/2017 12:45:33	Gathering partition schemes
+05/10/2017 12:45:33	Gathering functions
+05/10/2017 12:45:33	Gathering encrypted functions
+05/10/2017 12:45:33	Gathering aggregates
+05/10/2017 12:45:33	Gathering procedures
+05/10/2017 12:45:33	Gathering encrypted procedures
+05/10/2017 12:45:33	Gathering tables
+05/10/2017 12:45:33	Gathering primary keys
+05/10/2017 12:45:33	Gathering unique constraints
+05/10/2017 12:45:33	Gathering foreign keys
+05/10/2017 12:45:33	Gathering default constraints
+05/10/2017 12:45:33	Gathering check constraints
+05/10/2017 12:45:33	Gathering views
+05/10/2017 12:45:33	Gathering encrypted views
+05/10/2017 12:45:33	Gathering indexes
+05/10/2017 12:45:33	Gathering statistics
+05/10/2017 12:45:33	Gathering full-text index stoplists
+05/10/2017 12:45:33	Gathering search property lists
+05/10/2017 12:45:33	Gathering search properties
+05/10/2017 12:45:33	Gathering full-text indexes
+05/10/2017 12:45:33	Gathering column store indexes
+05/10/2017 12:45:33	Gathering spatial indexes
+05/10/2017 12:45:33	Gathering XML indexes
+05/10/2017 12:45:33	Gathering Selective XML indexes
+05/10/2017 12:45:33	Gathering encrypted triggers
+05/10/2017 12:45:33	Gathering triggers
+05/10/2017 12:45:33	Gathering encrypted and clr ddl triggers
+05/10/2017 12:45:33	Gathering ddl triggers
+05/10/2017 12:45:33	Gathering synonyms
+05/10/2017 12:45:33	Gathering defaults
+05/10/2017 12:45:33	Gathering data constraint uddt bindings
+05/10/2017 12:45:33	Gathering rules
+05/10/2017 12:45:33	Gathering data constraint uddt bindings
+05/10/2017 12:45:33	Gathering message types
+05/10/2017 12:45:33	Gathering queues
+05/10/2017 12:45:33	Gathering contracts
+05/10/2017 12:45:33	Gathering services
+05/10/2017 12:45:33	Gathering event notifications
+05/10/2017 12:45:33	Gathering remote service bindings
+05/10/2017 12:45:33	Gathering broker priorities
+05/10/2017 12:45:33	Gathering signatures
+05/10/2017 12:45:33	Gathering data compression options
+05/10/2017 12:45:33	Gathering sequence types
+05/10/2017 12:45:33	Gathering security policies
+05/10/2017 12:45:33	Gather column encryption keys
+05/10/2017 12:45:33	Gathering column master keys
+05/10/2017 12:45:33	Gathering external data sources
+05/10/2017 12:45:33	Gathering external file formats
+05/10/2017 12:45:33	Gathering external tables
+05/10/2017 12:45:33	Gathering extended properties
+05/10/2017 12:45:33	Gathering credentials
+05/10/2017 12:45:33	Gathering logins
+05/10/2017 12:45:34	Gathering server audits
+05/10/2017 12:45:34	Scanning project for duplicate elements
+05/10/2017 12:45:34	Finished duplicate element processing
+05/10/2017 12:45:34	Finished importing database.
+05/10/2017 12:45:34	A summary of the import was saved to the following location: C:\Projects\SelfBuildPipelineDV\SelfBuildPipelineDV\Import Schema Logs\SelfBuildPipelineDV_20171005114528.log
+05/10/2017 12:45:34	Click Finish to continue...
