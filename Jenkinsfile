@@ -10,7 +10,7 @@ def BranchToPort(String branchName) {
 }
  
 def StartContainer() {
-    bat "docker -ti --volume-driver=pure -v ${env.BRANCH_NAME}:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinux${env.BRANCH_NAME} -d -i -p ${BranchToPort(env.BRANCH_NAME)}:1433 microsoft/mssql-server-linux"
+    sh "docker -ti --volume-driver=pure -v ${env.BRANCH_NAME}:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinux${env.BRANCH_NAME} -d -i -p ${BranchToPort(env.BRANCH_NAME)}:1433 microsoft/mssql-server-linux"
 }
  
 def DeployDacpac() {
