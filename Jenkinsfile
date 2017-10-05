@@ -31,3 +31,9 @@ node('master') {
         stash includes: 'SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac', name: 'theDacpac'
     }
 }
+
+node ('linux-slave') {
+    stage('On linux-slave') {
+        sh 'ls -l'
+    }
+}
