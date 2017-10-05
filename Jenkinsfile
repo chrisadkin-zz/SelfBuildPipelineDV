@@ -34,7 +34,7 @@ node('master') {
 
 node('linux-slave') {
     stage('start container') {
-        StartContainer()
+        sh "ls -l"
     }
 }
 
