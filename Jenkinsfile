@@ -9,7 +9,7 @@ def BranchToPort(String branchName) {
     BranchPortMap.find { it['branch'] ==  branchName }['port']
 }
  
-def StartContainer = "docker -ti --volume-driver=pure -v ${env.BRANCH_NAME}:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinux${env.BRANCH_NAME} -d -i -p ${BranchToPort(env.BRANCH_NAME)}:1433 microsoft/mssql-server-linux"
+def StartContainer = 'docker -ti --volume-driver=pure -v ${env.BRANCH_NAME}:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinux${env.BRANCH_NAME} -d -i -p ${BranchToPort(env.BRANCH_NAME)}:1433 microsoft/mssql-server-linux'
  
 def DeployDacpac() {
     def SqlPackage = "C:\\Program Files\\Microsoft SQL Server\\140\\DAC\\bin\\sqlpackage.exe"
