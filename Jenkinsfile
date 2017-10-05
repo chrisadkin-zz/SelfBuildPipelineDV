@@ -34,6 +34,6 @@ node('master') {
 
 node ('linux-slave') {
     stage('On linux-slave') {
-        sh 'ls -l'
+        sh 'uname -a'
     }
 }
