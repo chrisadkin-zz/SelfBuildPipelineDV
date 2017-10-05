@@ -31,20 +31,3 @@ node('master') {
         stash includes: 'SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac', name: 'theDacpac'
     }
 }
-
-node('linux-slave') {
-    stage('start container') {
-        sh "ls -l"
-    }
-}
-
-node('master') {
-    stage('deploy dacpac') {
-        DeployDacpac()
-    }
-}
-
-node('linux-slave') {
-    sh "docker rm -f SQLLinux${env.BRANCH_NAME}"
-    sh "docker rm -f ${env.BRANCH_NAME}"
-}
