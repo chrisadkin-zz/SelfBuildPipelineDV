@@ -40,6 +40,8 @@ node('linux-slave') {
 
 node('master') {
     stage('deploy dacpac') {
+        DeployDacpac()
+    }
 }
 
 node('linux-slave') {
