@@ -11,7 +11,7 @@ node('master') {
 node ('linux-slave') {
     stage('Start Container') {
         sh 'docker volume create --driver=pure -o size=4GB datavol'
-        sh 'docker run -v datavol:/data -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssword1" --name mssqllinux -d -i -p 15565:1433 microsoft/mssql-server-linux:2017-latest'
+        sh 'docker run -v datavol:/data -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssword1" --name ${env.BRANCH_NAME} -d -i -p 15565:1433 microsoft/mssql-server-linux:2017-latest'
     }
 }
 
