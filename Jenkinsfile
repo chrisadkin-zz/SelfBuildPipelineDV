@@ -30,7 +30,7 @@ node('master') {
 
 node ('linux-slave') {
     stage('Start Container') {
-        sh 'docker -ti --volume-driver=pure -v DataVol:/data run -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinuxCtr -d -i -p 15556:1433 microsoft/mssql-server-linux:2017-latest'
+        sh 'docker run -ti --volume-driver=pure -v datavol:/data-e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinuxCtr -d -i -p 15556:1433 microsoft/mssql-server-linux:2017-latest'
     }
 }
 
