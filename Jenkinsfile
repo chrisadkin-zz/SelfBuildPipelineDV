@@ -16,12 +16,16 @@ node ('linux-slave') {
 }
 
 node('master') {
-    def SqlPackage = "C:\\Program Files\\Microsoft SQL Server\\140\\DAC\\bin\\sqlpackage.exe"
-    def SourceFile = "SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac"
-    def ConnString = "server=linux-slave,15565;database=SsdtDevOpsDemo;user id=sa;password=P@ssword1"
- 
-    unstash 'theDacpac'
-    bat "\"${SqlPackage}\" /Action:Publish /SourceFile:\"${SourceFile}\" /TargetConnectionString:\"${ConnString}\" /p:ExcludeObjectType=Logins"
+    stage('Deploy dacpac') {
+        def SqlPackage = "C:\\Program Files\\Microsoft SQL Server\\140\\DAC\\bin\\sqlpackage.exe"
+        def SourceFile = "SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac"
+        def ConnString = "server=linux-slave,15565;database=SsdtDevOpsDemo;user id=sa;password=P@ssword1"
+
+        unstash 'theDacpac'
+        bat "\"${SqlPackage}\" /Action:Publish /SourceFile:\"${SourceFile}\" /TargetConnectionString:\"${ConnString}\" /p:ExcludeObjectType=Logins"
+    }
+
+    stage('Execute tests') { }
 }
 
 node ('linux-slave') {
