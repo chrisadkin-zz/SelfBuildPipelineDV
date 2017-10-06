@@ -30,7 +30,8 @@ node('master') {
 
 node ('linux-slave') {
     stage('Start Container') {
-        sh 'docker run -ti --volume-driver=pure -v datavol:/data-e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=P@ssword1\" --name SQLLinuxCtr -d -i -p 15556:1433 microsoft/mssql-server-linux:2017-latest'
+        sh 'docker volume create -—driver=pure -o size=4GB datavol'
+        sh 'docker run -v datavol:/data -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=P@ssword1" --name mssqllinux -d -i -p 15565:1433 microsoft/mssql-server-linux:2017-latest'
     }
 }
 
@@ -41,4 +42,11 @@ node('master') {
  
     unstash 'theDacpac'
     bat "\"${SqlPackage}\" /Action:Publish /SourceFile:\"${SourceFile}\" /TargetConnectionString:\"${ConnString}\" /p:ExcludeObjectType=Logins"
+}
+
+node ('linux-slave') {
+    stage('Clean up') {
+        sh 'docker rm -f mssqllinux'
+        sh 'docker volume rm datavol'
+    }
 }
