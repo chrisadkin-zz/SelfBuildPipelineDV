@@ -16,7 +16,7 @@ def StartContainer() {
  
 def DeployDacpac() {
     def SqlPackage = "C:\\Program Files\\Microsoft SQL Server\\140\\DAC\\bin\\sqlpackage.exe"
-    def SourceFile = "SelfBuildPipeline\\bin\\Release\\SelfBuildPipelineDV.dacpac"
+    def SourceFile = "SelfBuildPipelineDV\\bin\\Release\\SelfBuildPipelineDV.dacpac"
     def ConnString = "server=linux-slave,${BranchToPort(env.BRANCH_NAME)};database=SsdtDevOpsDemo;user id=sa;password=P@ssword1"
  
     unstash 'theDacpac'
@@ -40,7 +40,7 @@ node('linux-slave') {
 }
 
 node {
-    stage('Deploy dacpax') {
+    stage('Deploy DACPAC') {
         DeployDacpac()
     }
 }
