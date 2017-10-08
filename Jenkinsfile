@@ -45,6 +45,8 @@ node('linux-slave') {
 
 node {
     stage('Deploy DACPAC') {
+        MssqlContainer.Inside { ls -l }
+        
         DeployDacpac()
     }
 }
