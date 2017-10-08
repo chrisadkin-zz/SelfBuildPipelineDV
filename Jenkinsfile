@@ -10,14 +10,8 @@ def BranchToPort(String branchName) {
 }
  
 def StartContainer() {
-    def MssqlContainer
     sh "docker volume create --driver=pure -o size=4GB ${env.BRANCH_NAME}"
-    
-    MssqlContainer = docker.image('microsoft/mssql-server-linux:2017-latest').run("-v ${env.BRANCH_NAME}:/data -e ACCEPT_EULA=Y -e SA_PASSWORD=P@ssword1 --name SQLLinux${env.BRANCH_NAME} -d -i -p  ${BranchToPort(env.BRANCH_NAME)}:1433")
-
-    MssqlContainer.inside {
-        sh 'uname -a'
-    }
+    docker.image('microsoft/mssql-server-linux:2017-latest').run("-v ${env.BRANCH_NAME}:/var/opt/mssql -e ACCEPT_EULA=Y -e SA_PASSWORD=P@ssword1 --name SQLLinux${env.BRANCH_NAME} -d -i -p  ${BranchToPort(env.BRANCH_NAME)}:1433")
 }
  
 def DeployDacpac() {
@@ -53,8 +47,7 @@ node {
 
 node ('linux-slave') {
     stage('Clean up') {
-          MssqlContainer.inside { ls -l }
-//        sh "docker rm -f SQLLinux${env.BRANCH_NAME}"
-//        sh "docker volume rm ${env.BRANCH_NAME}"
+        sh "docker rm -f SQLLinux${env.BRANCH_NAME}"
+        sh "docker volume rm ${env.BRANCH_NAME}"
     }
 }
