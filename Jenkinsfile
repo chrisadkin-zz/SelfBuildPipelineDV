@@ -45,14 +45,13 @@ node('linux-slave') {
 
 node {
     stage('Deploy DACPAC') {
-        MssqlContainer.Inside { ls -l }
-        
         DeployDacpac()
     }
 }
 
 node ('linux-slave') {
     stage('Clean up') {
+          MssqlContainer.Inside { ls -l }
 //        sh "docker rm -f SQLLinux${env.BRANCH_NAME}"
 //        sh "docker volume rm ${env.BRANCH_NAME}"
     }
