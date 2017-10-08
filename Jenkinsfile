@@ -48,6 +48,6 @@ node {
 node ('linux-slave') {
     stage('Clean up') {
         sh "docker rm -f SQLLinux${env.BRANCH_NAME}"
-        sh "docker volume rm ${env.BRANCH_NAME}"
+        //sh "docker volume rm ${env.BRANCH_NAME}"
     }
 }
