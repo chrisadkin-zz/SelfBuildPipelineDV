@@ -1,3 +1,7 @@
+def PowerShell(psCmd) {
+    bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';$psCmd;EXIT \$global:LastExitCode\""
+}
+
 def BranchToPort(String branchName) {
     def BranchPortMap = [
         [branch: 'master'   , port: 15565],
@@ -10,8 +14,10 @@ def BranchToPort(String branchName) {
 }
  
 def StartContainer() {
+    PowerShell "If (\$((docker ps -a --filter \"name=SQLLinux${env.BRANCH_NAME}\").Length) -eq 2) { docker rm -f SQLLinux${env.BRANCH_NAME} }"
     sh "docker volume create --driver=pure -o size=4GB ${env.BRANCH_NAME}"
-    docker.image('microsoft/mssql-server-linux:2017-latest').run("-v ${env.BRANCH_NAME}:/var/opt/mssql -e ACCEPT_EULA=Y -e SA_PASSWORD=P@ssword1 --name SQLLinux${env.BRANCH_NAME} -d -i -p  ${BranchToPort(env.BRANCH_NAME)}:1433")
+    docker.image('microsoft/mssql-server-linux:2017-GA').run("-v ${env.BRANCH_NAME}:/var/opt/mssql -e ACCEPT_EULA=Y -e SA_PASSWORD=P@ssword1 --name SQLLinux${env.BRANCH_NAME} -d -i -p  ${BranchToPort(env.BRANCH_NAME)}:1433")
+    PowerShell "While (\$((docker logs SQLLinux${env.BRANCH_NAME} | select-string ready | select-string client).Length) -eq 0) { Start-Sleep -s 1 }"
 }
  
 def DeployDacpac() {
@@ -25,7 +31,9 @@ def DeployDacpac() {
  
 node {
     stage('git checkout') {
-        checkout scm
+        timeout(time: 5, unit: 'SECONDS') {
+            checkout scm
+        }
     }
     stage('build dacpac') {
         bat "\"${tool name: 'Default', type: 'msbuild'}\" /p:Configuration=Release"
@@ -35,19 +43,22 @@ node {
 
 node('linux-slave') {
     stage('start container') {
-        StartContainer()
+        timeout(time: 20, unit: 'SECONDS') {
+            StartContainer()
+        }
     }
 }
 
 node {
     stage('Deploy DACPAC') {
-        DeployDacpac()
+        timeout(time: 60, unit: 'SECONDS') {
+            DeployDacpac()
+        }
     }
 }
 
 node ('linux-slave') {
     stage('Clean up') {
         sh "docker rm -f SQLLinux${env.BRANCH_NAME}"
-        //sh "docker volume rm ${env.BRANCH_NAME}"
     }
 }
